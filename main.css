@@ -1,0 +1,129 @@
+html,body{
+	background:#EFEFF4;
+	margin:0;
+	font-family:-apple-system,Arial,'PingFang SC','STHeiti Light','Hiragino Kaku Gothic ProN','Microsoft YaHei',sans-serif;
+	cursor:default
+}
+.heading{
+	background:#FFF;
+	height:40px;
+	width:100%;
+	position:fixed;
+	top:0;
+	left:0;
+	border-bottom:1px solid #ccc;
+	text-align:center;
+	z-index:1
+}
+.head_date {
+	background:#EFEFF4;
+	height: 34px;
+	margin: 2px auto;
+	border: 1px solid #888;
+	display: inline-block;
+	font-size: 18px;
+	line-height: 34px;
+	padding: 0 20px;
+	border-radius: 18px;
+}
+.content{
+	margin-top:45px
+}
+
+.data-block{
+	width:90%;
+	max-width:900px;
+	margin:10px auto;
+	border:solid 1px #BBB;
+	border-radius:10px;
+	overflow:hidden
+}
+.data-row{
+	height:40px;
+	line-height:40px;
+	background:#FFF;
+	border-bottom:solid 1px #DDD;
+	padding:0 10px;
+	position:relative;
+	animation-duration:.5s;
+	transform:translateY(20px);
+	opacity:0
+}
+.data-row.in{
+	animation-name:data-row-in;
+	transform:translateY(0);
+	opacity:1
+}
+@keyframes data-row-in{
+	from{
+		transform:translateY(20px);
+		opacity:0
+	}
+	to{
+		transform:translateY(0);
+		opacity:1
+	}
+}
+.data-row:last-of-type{
+	border-bottom:none
+}
+.back-progress{
+	position:absolute;
+	top:0;
+	left:0;
+	bottom:0;
+	width:0;
+	background:#EEE
+}
+.item-name{
+	position:relative;
+	display:inline-block;
+	white-space:nowrap;
+	max-width:calc(100% - 55px);
+	overflow:hidden;
+	text-overflow:ellipsis
+}
+.item-count{
+	position:relative;
+	float:right;
+	display:inline-block
+}
+
+.data-pie{
+	text-align:center;
+	display:flex;
+	height:300px;
+	margin:0 auto;
+	width:300px
+}
+.data-pie.twin{
+	width:700px
+}
+.pie{
+	width:300px
+}
+.pie-gap{
+	width:100px
+}
+@media screen and (max-width:750px){
+	.data-pie{
+		flex-direction:column;
+	}
+	.data-pie.twin{
+		width:300px;
+		height:600px;
+	}
+	.pie{
+		height:300px;
+	}
+	.pie-gap{
+		width:0
+	}
+}
+@media screen and (max-width:400px){
+	.flatpickr-calendar{
+		position:fixed;
+		top:42px;
+		left:calc(50% - 154px)
+	}
+}
