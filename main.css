@@ -127,3 +127,4 @@ html,body{
 		left:calc(50% - 154px)
 	}
 }
+a:visited{color:unset}
