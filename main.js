@@ -254,8 +254,7 @@ function getData(date){
 	}
 	xhr.send();
 }
-setTimeout(function(){
-
+window.addEventListener('load',function(){
 var check=function(e){
 	return (e<10?'0':'')+e;
 }
@@ -273,7 +272,7 @@ head_date = flatpickr('.head_date',{
 		document.querySelector('.head_date').textContent='加载中…';
 		getData( (''+dates[0].getFullYear()+check(dates[0].getMonth()+1)+check(dates[0].getDate())).substr(2) )
 	}
-});},100)
+});});
 
 toTop=(function(){
 var currentPos,startTime,scrolling=false,
