@@ -41,15 +41,49 @@ function dataExpand() {
 	this.remove();
 	animationTrigger();
 }
+function dataChildExpand(e) {
+	if (!this.firstChild.contains(e.target)) return;
+	var sub = this.lastChild;
+	if (this.classList.contains('expand')) {
+		this.classList.remove('expand');
+		this.style.height = '41px';
+	} else {
+		this.classList.add('expand');
+		this.style.height = (41 * (sub.children.length + 1)) + 'px';
+		Array.from(sub.children).forEach(function (i) {
+			if (!i.classList.contains('in'))
+				animationQueue.push({
+					type: 'data-row',
+					elem: i
+				});
+		});
+		animationTrigger();
+	}
+}
 function genBlock(total, data) {
 	var child = [], max = data[0][1], content = document.querySelector('.content'), count = 0;
 	data.forEach(function (i) {
 		count += i[1];
-		child.push(_('div', { className: 'data-row' }, [
+		var parent = _('div', { className: 'data-row' }, [
 			_('div', { className: 'back-progress', style: { width: (i[1] / max * 100) + '%' } }),
 			_('div', { className: 'item-name' }, [_('text', i[0])]),
 			_('div', { className: 'item-count' }, [_('text', i[1])])
-		]));
+		]);
+		if (i[2] !== undefined) {
+			var subTotal = i[1], subChild = [];
+			i[2].forEach(function (sub) {
+				var ele = _('div', { className: 'data-row' }, [
+					_('div', { className: 'back-progress', style: { width: (sub[1] / subTotal * 100) + '%' } }),
+					_('div', { className: 'item-name' }, [_('text', '　' + sub[0])]),
+					_('div', { className: 'item-count' }, [_('text', sub[1])])
+				]);
+				subChild.push(ele);
+			});
+			parent.childRef = subChild;
+			child.push(_('div', { className: 'data-row-group', event: { click: dataChildExpand } }, [parent, _('div', {}, subChild)]));
+		} else {
+			child.push(parent);
+		}
 	});
 	if (count < total) {
 		child.push(_('div', { className: 'data-row' }, [
@@ -196,19 +230,21 @@ function animationTick() {
 	animationQueueRunning = true;
 	var hit = false;
 	loop: for (var i = 0; i < animationQueue.length; i++) {
-		var item = animationQueue[i], box;
+		var item = animationQueue[i], box, elem = item.elem;
 		switch (item.type) {
 			case 'data-row':
-				box = item.elem.getBoundingClientRect();
+				if (elem.className === 'data-row-group')
+					elem = elem.firstChild;
+				box = elem.getBoundingClientRect();
 				if (box.top < (innerHeight)) {
-					item.elem.className += ' in';
+					elem.className += ' in';
 					animationQueue.splice(i, 1);
 					hit = true;
 					break loop;
 				}
 				break;
 			case 'pie':
-				box = item.elem.getBoundingClientRect();
+				box = elem.getBoundingClientRect();
 				if (box.top < (innerHeight)) {
 					new Highcharts.Chart(item.param);
 					animationQueue.splice(i, 1);

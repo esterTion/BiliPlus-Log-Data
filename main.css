@@ -38,6 +38,11 @@ html,body{
 	border-radius:10px;
 	overflow:hidden
 }
+.data-row-group{
+	height:41px;
+	overflow:hidden;
+	transition:height .5s
+}
 .data-row{
 	height:40px;
 	line-height:40px;
@@ -48,6 +53,23 @@ html,body{
 	animation-duration:.5s;
 	transform:translateY(20px);
 	opacity:0
+}
+.data-row-group>.data-row{
+	cursor:pointer;
+	padding-left:30px;
+}
+.data-row-group > .data-row::before {
+	content: "◢";
+	position: absolute;
+	left: 10px;
+	font-size: 20px;
+	color: #000;
+	z-index: 1;
+	transform: rotate(-45deg);
+	transition: .2s
+}
+.data-row-group.expand > .data-row::before {
+	transform: rotate(0);
 }
 .data-row.in{
 	animation-name:data-row-in;
