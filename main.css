@@ -59,17 +59,22 @@ html,body{
 	padding-left:30px;
 }
 .data-row-group > .data-row::before {
-	content: "◢";
+	content: "";
 	position: absolute;
 	left: 10px;
-	font-size: 20px;
+	width: 14px;
 	color: #000;
 	z-index: 1;
-	transform: rotate(-45deg);
-	transition: .2s
+	transition: .2s;
+	height: 14px;
+	top: 12px;
+	background-image: url('data:image/svg+xml,<svg%20xmlns="http://www.w3.org/2000/svg"%20width="20"%20height="20"%20fill="rgb(0,0,0)"><path d="M10,0L20,10L10,20L10,0z"%20/></svg>');
+	background-size: 14px 14px;
+	transition: .2s;
+	transform: rotate(0);
 }
 .data-row-group.expand > .data-row::before {
-	transform: rotate(0);
+	transform: rotate(45deg);
 }
 .data-row.in{
 	animation-name:data-row-in;
