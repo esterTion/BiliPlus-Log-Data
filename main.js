@@ -298,6 +298,10 @@ window.addEventListener('load', function () {
 	head_date = flatpickr('.head_date', {
 		minDate: '2016.10.11',
 		maxDate: 'today',
+		disable: [{
+			from: '2018.5.30',
+			to  : '2018.6.21'
+		}],
 		appendTo: document.querySelector('.heading'),
 		dateFormat: 'Y年m月d日',
 		static: true,
