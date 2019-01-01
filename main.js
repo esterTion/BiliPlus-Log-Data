@@ -301,6 +301,12 @@ window.addEventListener('load', function () {
 		disable: [{
 			from: '2018.5.30',
 			to  : '2018.6.21'
+		}, {
+			from: '2018.12.18',
+			to  : '2018.12.31'
+		}, {
+			from: 'today',
+			to  : 'today'
 		}],
 		appendTo: document.querySelector('.heading'),
 		dateFormat: 'Y年m月d日',
